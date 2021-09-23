@@ -1,6 +1,7 @@
 const { isBlacklistedHeader } = require('../aid')
+const fixHost = require('./fixHost')
 
-function header(node, spec) {
+function header(node, spec, overrideHosts = []) {
   const item = {}
 
   if (node.name && node.name[0] === ':') {
@@ -12,7 +13,7 @@ function header(node, spec) {
   }
 
   if (node.value) {
-    item.value = node.value
+    item.value = fixHost(node.value, overrideHosts)
   }
 
   if (node.comment) {

@@ -12,6 +12,8 @@ function check(name, spec) {
       return variant.JSONPath(name, spec)
     case CheckType.Regex:
       return variant.Regex(name, spec)
+    case CheckType.CODING:
+      return variant.CODING(name, spec)
     default:
       throw new UnrecognizedError(
         { name: 'UnrecognizedCheckType' },

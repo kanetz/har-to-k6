@@ -1,8 +1,8 @@
 const page = require('./page')
 
-function pages(node, result) {
+function pages(node, result, overrideHosts = []) {
   for (const item of node) {
-    page(item, result)
+    page(item, result, overrideHosts)
   }
 }
 

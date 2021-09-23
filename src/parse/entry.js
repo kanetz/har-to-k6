@@ -5,7 +5,7 @@ const variables = require('./variables')
 const sleep = require('./sleep')
 const { entrySpec: makeEntrySpec } = require('../make')
 
-function entry(node, result) {
+function entry(node, result, overrideHosts = []) {
   const spec = makeEntrySpec()
   if (node.pageref) {
     spec.page = node.pageref
@@ -16,7 +16,7 @@ function entry(node, result) {
   if (node.sleep) {
     spec.sleep = sleep(node.sleep)
   }
-  request(node.request, spec.request)
+  request(node.request, spec.request, overrideHosts)
   if (node.checks) {
     checks(node.checks, spec.checks)
   }

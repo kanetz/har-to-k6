@@ -4,7 +4,7 @@ const entries = require('./entries')
 const pages = require('./pages')
 const options = require('./options')
 
-function log(node, result) {
+function log(node, result, overrideHosts = []) {
   if (node.options) {
     options(node.options, result)
   }
@@ -18,10 +18,10 @@ function log(node, result) {
     result.comment.push(node.comment)
   }
   if (node.pages) {
-    pages(node.pages, result)
+    pages(node.pages, result, overrideHosts)
   }
   if (node.entries) {
-    entries(node.entries, result)
+    entries(node.entries, result, overrideHosts)
   }
 }
 

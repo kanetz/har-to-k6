@@ -63,6 +63,7 @@ const CheckType = {
   JSONPathValue: 1,
   JSONPath: 2,
   Regex: 3,
+  CODING: 999,
 }
 const CheckTypeEncoding = inverse(CheckType)
 

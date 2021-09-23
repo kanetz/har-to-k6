@@ -110,3 +110,39 @@ test.serial('postData empty', (t) => {
   )
   t.true(postData.notCalled)
 })
+
+test.serial('override hosts', (t) => {
+  const spec = makeRequestSpec()
+  request(
+    {
+      method: 'get',
+      url: 'http://example.com',
+    },
+    spec,
+    [
+      {
+        src: 'example.com',
+        dest: 'overrided.host',
+      },
+    ]
+  )
+  t.is(spec.address, 'http://overrided.host')
+})
+
+test.serial('override hosts not matched', (t) => {
+  const spec = makeRequestSpec()
+  request(
+    {
+      method: 'get',
+      url: 'http://example.com',
+    },
+    spec,
+    [
+      {
+        src: '.example.com',
+        dest: '.overrided.host',
+      },
+    ]
+  )
+  t.is(spec.address, 'http://example.com')
+})

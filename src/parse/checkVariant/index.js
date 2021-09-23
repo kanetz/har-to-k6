@@ -3,4 +3,5 @@ module.exports = {
   JSONPathValue: require('./JSONPathValue'),
   Regex: require('./Regex'),
   Text: require('./Text'),
+  CODING: require('./CODING'),
 }

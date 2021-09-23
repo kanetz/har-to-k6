@@ -55,3 +55,42 @@ test('Content-Length header is removed', (t) => {
   header({ name: 'Content-Length', value: '41' }, spec)
   t.deepEqual(spec, new Map())
 })
+
+test('Host is overrided', (t) => {
+  const spec = makeSpec()
+  header(
+    {
+      name: 'Host',
+      value: 'example.com',
+    },
+    spec,
+    [
+      {
+        src: 'example.com',
+        dest: 'overrided.host',
+      },
+    ]
+  )
+  t.deepEqual(
+    spec,
+    new Map().set('Host', new Set([{ value: 'overrided.host' }]))
+  )
+})
+
+test('Host is not overrided', (t) => {
+  const spec = makeSpec()
+  header(
+    {
+      name: 'Host',
+      value: 'example.com',
+    },
+    spec,
+    [
+      {
+        src: '.example.com',
+        dest: '.overrided.host',
+      },
+    ]
+  )
+  t.deepEqual(spec, new Map().set('Host', new Set([{ value: 'example.com' }])))
+})

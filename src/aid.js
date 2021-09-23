@@ -49,7 +49,7 @@ function getContentTypeValue(str = '') {
 }
 
 function isBlacklistedHeader(headerName = '') {
-  const HEADERS_BLACKLIST = ['Content-Length']
+  const HEADERS_BLACKLIST = ['Content-Length', 'Cookie']
   const [name] = headerName.split(';')
 
   return HEADERS_BLACKLIST.some(

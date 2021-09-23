@@ -1,8 +1,8 @@
 const entry = require('./entry')
 
-function entries(node, result) {
+function entries(node, result, overrideHosts = []) {
   for (const item of node) {
-    entry(item, result)
+    entry(item, result, overrideHosts)
   }
 }
 

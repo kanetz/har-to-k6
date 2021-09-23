@@ -3,10 +3,11 @@ const postData = require('./postData')
 const queryString = require('./queryString')
 const state = require('./state/request')
 const { emptyObject, getContentTypeValue } = require('../aid')
+const fixHost = require('./fixHost')
 
-function request(node, spec) {
+function request(node, spec, overrideHosts = []) {
   spec.method = node.method.toUpperCase()
-  spec.address = node.url
+  spec.address = fixHost(node.url, overrideHosts)
 
   if (node.comment) {
     spec.comment = node.comment
@@ -17,7 +18,7 @@ function request(node, spec) {
   }
 
   if (node.headers) {
-    headers(node.headers, spec.headers)
+    headers(node.headers, spec.headers, overrideHosts)
   }
 
   if (node.postData && !emptyObject(node.postData)) {

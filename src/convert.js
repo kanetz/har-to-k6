@@ -8,7 +8,18 @@ async function convert(archive, options = DEFAULT_OPTIONS) {
   const source = normalize(archive, options)
 
   validate(source)
-  const result = parse(source)
+
+  const overrideHostsSpecs = options.overrideHosts
+    .split(',')
+    .map((s) => {
+      const spec = s.split('=')
+      return {
+        src: spec[0],
+        dest: spec[1],
+      }
+    })
+    .filter((s) => s.src && s.dest)
+  const result = parse(source, overrideHostsSpecs)
 
   // NOTE: => render(result) instead of { main: render(result) } ??
   // Then /bin/har-to-k6.js need to change as well.

@@ -21,7 +21,7 @@ function analyze(spec) {
   factor.capacity = capacity(spec)
   address(spec, factor)
   body(spec, factor)
-  factor.headers = headers(spec.headers)
+  factor.headers = headers(spec.headers, factor.address)
   factor.cookies = cookies(spec.cookies)
   factor.options = options(factor)
   factor.args = args(factor)

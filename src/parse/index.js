@@ -9,9 +9,9 @@ const { result: makeResult } = require('../make')
  *
  * Assumes valid archive.
  */
-function parse(archive) {
+function parse(archive, overrideHosts = []) {
   const result = makeResult()
-  root(archive, result)
+  root(archive, result, overrideHosts)
   flow(result)
   imports(archive, result)
   declares(archive, result)

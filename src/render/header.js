@@ -1,11 +1,19 @@
 const note = require('./note/items')
 const text = require('./text')
+const { js, from, unquote } = require('../codegen')
 
-function header(name, items) {
+const xsrfTokenTemplate = js`(http.cookieJar().cookiesForURL(${from(
+  'url'
+)})['XSRF-TOKEN']||[])[0]`
+
+function header(name, items, address) {
   items = [...items]
   return {
     name,
-    value: value(items),
+    value:
+      name == 'X-XSRF-TOKEN'
+        ? xsrfTokenTemplate({ url: unquote(address) })
+        : value(items),
     comment: note(items),
   }
 }

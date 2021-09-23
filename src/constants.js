@@ -1,5 +1,6 @@
 const DEFAULT_OPTIONS = {
   addSleep: false,
+  overrideHosts: '',
 }
 
 const DEFAULT_CLI_OPTIONS = {

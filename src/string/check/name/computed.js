@@ -2,6 +2,7 @@ const JSONPath = require('./JSONPath')
 const JSONPathValue = require('./JSONPathValue')
 const Regex = require('./Regex')
 const Text = require('./Text')
+const CODING = require('./CODING')
 const { CheckType } = require('../../../enum')
 const { UnrecognizedError } = require('../../../error')
 
@@ -15,6 +16,8 @@ function computed(node) {
       return Regex(node)
     case CheckType.Text:
       return Text(node)
+    case CheckType.CODING:
+      return CODING(node)
     default:
       throw new UnrecognizedError(
         { name: 'UnrecognizedCheckType' },

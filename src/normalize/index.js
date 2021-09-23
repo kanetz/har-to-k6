@@ -74,6 +74,30 @@ function getSleep(node, timeline) {
 
 /**
  *
+ * @param {Entry} entry
+ * @return {Entry}
+ */
+function getEntry(entry) {
+  if (
+    entry['_resourceType'] != 'xhr' ||
+    !entry.request.url.includes('/api/') ||
+    !!entry.checks
+  ) {
+    return entry
+  }
+
+  return {
+    ...entry,
+    checks: [
+      {
+        type: 999,
+      },
+    ],
+  }
+}
+
+/**
+ *
  * @param {TimelineNode[]} timeline
  * @param {{ addSleep?: boolean }} options
  * @return {Entry[]}
@@ -84,13 +108,13 @@ function getEntries(timeline, options) {
       const sleep = getSleep(node, timeline)
       if (sleep) {
         return {
-          ...node.entry,
+          ...getEntry(node.entry),
           sleep,
         }
       }
     }
 
-    return node.entry
+    return getEntry(node.entry)
   })
 }
 
@@ -117,6 +141,12 @@ function normalize(archive, options = DEFAULT_OPTIONS) {
   return {
     ...archive,
     log: {
+      options: {
+        thresholds: {
+          checks: ['rate==1.0'],
+          http_req_failed: ['rate==0.0'],
+        },
+      },
       ...archive.log,
       entries: getEntries(timeline, options),
     },

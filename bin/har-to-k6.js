@@ -23,6 +23,11 @@ io.version(version)
     DEFAULT_CLI_OPTIONS.output
   )
   .option(
+    '-H, --override-hosts',
+    'Replace hosts in request urls and headers, eg. -H src.com=dest.io',
+    DEFAULT_CLI_OPTIONS.overrideHosts
+  )
+  .option(
     '--add-sleep',
     'Add automatic sleep() based on startDateTime',
     DEFAULT_CLI_OPTIONS.addSleep

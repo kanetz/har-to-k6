@@ -1,6 +1,7 @@
+const fixHost = require('./fixHost')
 const sleep = require('./sleep')
 
-function pageName(node) {
+function pageName(node, overrideHosts = []) {
   const nameParts = []
 
   if (node.name) {
@@ -10,15 +11,15 @@ function pageName(node) {
   }
 
   if (node.title) {
-    nameParts.push(node.title)
+    nameParts.push(fixHost(node.title, overrideHosts))
   }
 
   return nameParts.join(' - ')
 }
 
-function page(node, result) {
+function page(node, result, overrideHosts = []) {
   const spec = {
-    name: pageName(node),
+    name: pageName(node, overrideHosts),
   }
 
   if (node.comment) {
