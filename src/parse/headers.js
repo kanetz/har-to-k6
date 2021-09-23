@@ -1,8 +1,8 @@
 const header = require('./header')
 
-function headers(node, spec, overrideHosts = []) {
+function headers(node, spec, hostsSpecs = []) {
   for (const item of node) {
-    header(item, spec, overrideHosts)
+    header(item, spec, hostsSpecs)
   }
 }
 

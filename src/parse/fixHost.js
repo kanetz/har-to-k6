@@ -1,11 +1,7 @@
-function fixHost(value, overrideHosts = []) {
-  const firstMatchedSpec = overrideHosts.find((spec) =>
-    value.includes(spec.src)
-  )
+function fixHost(value, specs = []) {
+  const spec = specs.find((spec) => value.includes(spec.src))
 
-  return firstMatchedSpec
-    ? value.replace(firstMatchedSpec.src, firstMatchedSpec.dest)
-    : value
+  return spec && spec.dest ? value.replace(spec.src, spec.dest) : value
 }
 
 module.exports = fixHost

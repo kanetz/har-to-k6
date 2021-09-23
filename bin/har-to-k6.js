@@ -23,9 +23,9 @@ io.version(version)
     DEFAULT_CLI_OPTIONS.output
   )
   .option(
-    '-H, --override-hosts',
-    'Replace hosts in request urls and headers, eg. -H src.com=dest.io',
-    DEFAULT_CLI_OPTIONS.overrideHosts
+    '-H, --hosts <hosts>',
+    'Specify or replace hosts in request urls and headers, e.g. -H target.net,src1.com=dest2.io',
+    DEFAULT_CLI_OPTIONS.hosts
   )
   .option(
     '--add-sleep',

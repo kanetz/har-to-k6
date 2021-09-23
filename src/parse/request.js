@@ -5,9 +5,9 @@ const state = require('./state/request')
 const { emptyObject, getContentTypeValue } = require('../aid')
 const fixHost = require('./fixHost')
 
-function request(node, spec, overrideHosts = []) {
+function request(node, spec, hostsSpecs = []) {
   spec.method = node.method.toUpperCase()
-  spec.address = fixHost(node.url, overrideHosts)
+  spec.address = fixHost(node.url, hostsSpecs)
 
   if (node.comment) {
     spec.comment = node.comment
@@ -18,7 +18,7 @@ function request(node, spec, overrideHosts = []) {
   }
 
   if (node.headers) {
-    headers(node.headers, spec.headers, overrideHosts)
+    headers(node.headers, spec.headers, hostsSpecs)
   }
 
   if (node.postData && !emptyObject(node.postData)) {

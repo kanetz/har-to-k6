@@ -102,20 +102,27 @@ function getEntry(entry) {
  * @param {{ addSleep?: boolean }} options
  * @return {Entry[]}
  */
-function getEntries(timeline, options) {
-  return timeline.map((node) => {
-    if (options.addSleep) {
-      const sleep = getSleep(node, timeline)
-      if (sleep) {
-        return {
-          ...getEntry(node.entry),
-          sleep,
+function getEntries(timeline, options, hostsSpecs) {
+  return timeline
+    .filter((node) =>
+      hostsSpecs.find((spec) => {
+        const url = node.entry.request.url
+        return url.substr(0, url.lastIndexOf('/')).includes(spec.src)
+      })
+    )
+    .map((node) => {
+      if (options.addSleep) {
+        const sleep = getSleep(node, timeline)
+        if (sleep) {
+          return {
+            ...getEntry(node.entry),
+            sleep,
+          }
         }
       }
-    }
 
-    return getEntry(node.entry)
-  })
+      return getEntry(node.entry)
+    })
 }
 
 /**
@@ -124,7 +131,7 @@ function getEntries(timeline, options) {
  * @param {{ addSleep?: boolean }} options
  * @return {HAR}
  */
-function normalize(archive, options = DEFAULT_OPTIONS) {
+function normalize(archive, options = DEFAULT_OPTIONS, hostsSpecs = []) {
   // Return archive if it doesnt pass validation
   if (!isValidArchive(archive)) {
     return archive
@@ -148,7 +155,7 @@ function normalize(archive, options = DEFAULT_OPTIONS) {
         },
       },
       ...archive.log,
-      entries: getEntries(timeline, options),
+      entries: getEntries(timeline, options, hostsSpecs),
     },
   }
 }

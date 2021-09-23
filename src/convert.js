@@ -5,11 +5,7 @@ const normalize = require('./normalize')
 const { DEFAULT_OPTIONS } = require('./constants')
 
 async function convert(archive, options = DEFAULT_OPTIONS) {
-  const source = normalize(archive, options)
-
-  validate(source)
-
-  const overrideHostsSpecs = options.overrideHosts
+  const hostsSpecs = options.hosts
     .split(',')
     .map((s) => {
       const spec = s.split('=')
@@ -18,8 +14,13 @@ async function convert(archive, options = DEFAULT_OPTIONS) {
         dest: spec[1],
       }
     })
-    .filter((s) => s.src && s.dest)
-  const result = parse(source, overrideHostsSpecs)
+    .filter((s) => s.src)
+
+  const source = normalize(archive, options, hostsSpecs)
+
+  validate(source)
+
+  const result = parse(source, hostsSpecs)
 
   // NOTE: => render(result) instead of { main: render(result) } ??
   // Then /bin/har-to-k6.js need to change as well.
