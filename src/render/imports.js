@@ -1,10 +1,12 @@
-function imports(spec) {
+function imports(spec, opts) {
   if (any(spec)) {
     const lines = []
     k6(spec, lines)
     http(spec, lines)
     k6JsLibs(spec, lines)
-    setupVU(spec, lines)
+    if (opts && opts.addSetupVU) {
+      setupVU(spec, lines)
+    }
     return lines.join(`\n`)
   } else {
     return null

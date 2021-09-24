@@ -33,6 +33,11 @@ io.version(version)
     DEFAULT_CLI_OPTIONS.excludeExternalHosts
   )
   .option(
+    '--add-setup-vu',
+    'Add setupVU() in rendered script',
+    DEFAULT_CLI_OPTIONS.addSetupVU
+  )
+  .option(
     '--add-sleep',
     'Add automatic sleep() based on startDateTime',
     DEFAULT_CLI_OPTIONS.addSleep

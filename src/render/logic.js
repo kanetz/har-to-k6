@@ -5,11 +5,11 @@ const flow = require('./flow')
 const variableSpace = require('./variableSpace')
 const defaultSleep = require('./defaultSleep')
 
-function logic(result) {
+function logic(result, opts) {
   const content = [
     declares(result.declares),
     variableSpace(result),
-    setupVU(),
+    setupVU(opts),
     flow(result),
     defaultSleep(result),
   ].filter((item) => item)

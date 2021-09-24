@@ -2,6 +2,7 @@ const DEFAULT_OPTIONS = {
   addSleep: false,
   hosts: '',
   excludeExternalHosts: false,
+  addSetupVU: false,
 }
 
 const DEFAULT_CLI_OPTIONS = {

@@ -78,7 +78,12 @@ function getSleep(node, timeline) {
  * @return {Entry}
  */
 function getEntry(entry) {
-  if (!entry.request.url.includes('/api/') || entry.checks) {
+  if (
+    !entry.request ||
+    !entry.request.url ||
+    !entry.request.url.includes('/api/') ||
+    entry.checks
+  ) {
     return entry
   }
 

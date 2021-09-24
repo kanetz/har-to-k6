@@ -1,5 +1,5 @@
-function setupVU() {
-  return 'setupVU()'
+function setupVU(opts) {
+  return opts && opts.addSetupVU ? 'setupVU()' : null
 }
 
 module.exports = setupVU
