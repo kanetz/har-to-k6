@@ -28,6 +28,11 @@ io.version(version)
     DEFAULT_CLI_OPTIONS.hosts
   )
   .option(
+    '-X, --exclude-external-hosts',
+    'Exclude requests for external hosts',
+    DEFAULT_CLI_OPTIONS.excludeExternalHosts
+  )
+  .option(
     '--add-sleep',
     'Add automatic sleep() based on startDateTime',
     DEFAULT_CLI_OPTIONS.addSleep

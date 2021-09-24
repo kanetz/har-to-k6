@@ -1,7 +1,7 @@
 {
-    "name": "har-to-k6",
-    "description": "Convert LI-HAR to k6 script",
-    "version": "0.10.0",
+    "name": "har-to-k6.coding",
+    "description": "Convert LI-HAR to k6 script, customized for CODING",
+    "version": "0.10.1",
     "license": "Apache-2.0",
     "keywords": [
         "k6",
@@ -16,9 +16,9 @@
     "directories": {
         "lib": "src"
     },
-    "homepage": "https://github.com/loadimpact/har-to-k6",
-    "repository": "github:loadimpact/har-to-k6",
-    "bugs": "https://github.com/loadimpact/har-to-k6/issues",
+    "homepage": "https://github.com/kanetz/har-to-k6",
+    "repository": "github:kanetz/har-to-k6",
+    "bugs": "https://github.com/kanetz/har-to-k6/issues",
     "engines": {
         "node": ">=11.0.0"
     },

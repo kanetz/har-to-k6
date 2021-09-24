@@ -78,11 +78,7 @@ function getSleep(node, timeline) {
  * @return {Entry}
  */
 function getEntry(entry) {
-  if (
-    entry['_resourceType'] != 'xhr' ||
-    !entry.request.url.includes('/api/') ||
-    !!entry.checks
-  ) {
+  if (!entry.request.url.includes('/api/') || entry.checks) {
     return entry
   }
 
@@ -104,11 +100,13 @@ function getEntry(entry) {
  */
 function getEntries(timeline, options, hostsSpecs) {
   return timeline
-    .filter((node) =>
-      hostsSpecs.find((spec) => {
-        const url = node.entry.request.url
-        return url.substr(0, url.lastIndexOf('/')).includes(spec.src)
-      })
+    .filter(
+      (node) =>
+        !options.excludeExternalHosts ||
+        hostsSpecs.find((spec) => {
+          const url = node.entry.request.url
+          return url.substr(0, url.lastIndexOf('/')).includes(spec.src)
+        })
     )
     .map((node) => {
       if (options.addSleep) {

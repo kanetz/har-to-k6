@@ -4,6 +4,7 @@ function imports(spec) {
     k6(spec, lines)
     http(spec, lines)
     k6JsLibs(spec, lines)
+    setupVU(spec, lines)
     return lines.join(`\n`)
   } else {
     return null
@@ -81,6 +82,10 @@ function k6JsLibs(spec, lines) {
       lines.push(`import { FormData } from "${K6_JS_LIBS.formData}"`)
     }
   }
+}
+
+function setupVU(spec, lines) {
+  lines.push(`import setupVU from "./setup_vu.js";`)
 }
 
 module.exports = imports

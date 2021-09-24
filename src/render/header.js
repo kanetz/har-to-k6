@@ -11,7 +11,7 @@ function header(name, items, address) {
   return {
     name,
     value:
-      name == 'X-XSRF-TOKEN'
+      name.toLowerCase() == 'X-XSRF-TOKEN'.toLowerCase()
         ? xsrfTokenTemplate({ url: unquote(address) })
         : value(items),
     comment: note(items),
